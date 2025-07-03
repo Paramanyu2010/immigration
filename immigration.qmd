@@ -2,5 +2,23 @@
 title: "xx"
 author: "Paramanyu Gupta"
 format: html
+execute: 
+  echo: false
 ---
 
+
+```{r}
+#| message: false
+library(tidyverse)
+library(primer.data)
+library(tidymodels)
+library(broom)
+```
+
+Attitudes toward immigration vary across individuals and may be influenced by social interactions. This study uses data collected from commuters on Boston train platforms in 2012 to examine how exposure to Spanish-speakers affects these attitudes. The effect of hearing Spanish speakers in Boston in 2012 may not generalize to Georgia voters today due to changes in demographics and political climate.
+
+
+
+$$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \epsilon$$
+
+with $\epsilon \sim \mathcal{N}(0, \sigma^2)$.

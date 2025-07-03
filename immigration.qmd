@@ -13,12 +13,27 @@ library(tidyverse)
 library(primer.data)
 library(tidymodels)
 library(broom)
+library(knitr)
 ```
 
-Attitudes toward immigration vary across individuals and may be influenced by social interactions. This study uses data collected from commuters on Boston train platforms in 2012 to examine how exposure to Spanish-speakers affects these attitudes. The effect of hearing Spanish speakers in Boston in 2012 may not generalize to Georgia voters today due to changes in demographics and political climate.
-
-
+Attitudes toward immigration vary across individuals and may be influenced by social interactions. This study uses data collected from commuters on Boston train platforms in 2012 to examine how exposure to Spanish-speakers affects these attitudes. The effect of hearing Spanish speakers in Boston in 2012 may not generalize to Georgia voters today due to changes in demographics and political climate. I modeled attitudes toward immigration, measured by average response to survey questions, as a linear function of exposure to Spanish speakers. The model estimates a difference in average immigration attitudes between treated and control groups using a simple linear regression.
 
 $$Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_n X_n + \epsilon$$
 
 with $\epsilon \sim \mathcal{N}(0, \sigma^2)$.
+
+$$\widehat{\text{att\_end}} = 8.45 + 1.55 \cdot \text{treatment}_{\text{Treated}}$$
+
+```{r}
+#| cache: true
+fit_att <- linear_reg(engine = "lm") |> 
+  fit(att_end ~ treatment, data = trains)
+```
+
+```{r}
+tidy(fit_att, conf.int = TRUE) |>
+  select(term, estimate, conf.low, conf.high) |>
+  kable(
+    caption = "Estimates and 95% Confidence Intervals for Parameters\nSource: Enos (2014)"
+  )
+```
